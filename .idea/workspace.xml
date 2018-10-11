@@ -18,8 +18,8 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="57">
-                <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
+              <first_editor relative-caret-position="361">
+                <caret line="25" column="1" lean-forward="true" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
               </first_editor>
               <second_editor />
             </state>
@@ -208,7 +208,7 @@
       <workItem from="1539132128513" duration="18000" />
       <workItem from="1539132151544" duration="27000" />
       <workItem from="1539132194910" duration="7906000" />
-      <workItem from="1539170216281" duration="28136000" />
+      <workItem from="1539170216281" duration="30338000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1539087660532</created>
@@ -221,7 +221,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="37424000" />
+    <option name="totallyTimeSpent" value="39626000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
@@ -248,7 +248,7 @@
       <window_info anchor="bottom" id="Run" order="7" />
       <window_info anchor="bottom" id="Spring" order="4" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.32918397" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2803468" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2803468" />
       <window_info id="JRebel" order="2" side_tool="true" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -395,8 +395,8 @@
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="FIRST">
-          <first_editor relative-caret-position="57">
-            <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
+          <first_editor relative-caret-position="361">
+            <caret line="25" column="1" lean-forward="true" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
           </first_editor>
           <second_editor />
         </state>

@@ -20,6 +20,11 @@
 
  *  redis的偏移量都是从0开始
  
+ *  migrate在redis开启密码验证下运行会报错,应该去掉密码验证后再使用
+ 
+ 
+ 
+ 
  
  
  *  操作key的相关命令:
@@ -47,7 +52,7 @@
     restore key seconds serialized-value [replace]  //详见http://redisdoc.com/
     
     sort  //详见http://redisdoc.com/
-    migrate  //详见http://redisdoc.com/
+    migrate  //此命令在redis开启密码验证下运行会报错,应该去掉密码验证后再使用.详见http://redisdoc.com/和https://blog.csdn.net/sunhuiliang85/article/details/74352446
     object  //详见http://redisdoc.com/
     
     
