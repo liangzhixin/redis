@@ -22,6 +22,8 @@
  
  *  migrate在redis开启密码验证下运行会报错,应该去掉密码验证后再使用
  
+ *  dump序列化key时,client以--raw连接时不会返回结果
+ 
  
  
  
