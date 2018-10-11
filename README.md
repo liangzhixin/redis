@@ -61,17 +61,17 @@
     bitfield ...  //详见http://redisdoc.com/
     
     incr key  //将key中存储的数值加1
-    incrby key increment  //将key中存储的数值加上increment(整数)
-    incrbyfloat key increment  //将key中存储的数值加上increment(浮点数)
+    incrby key increment  //将key中存储的数值加上increment(整数,increment可以是正数或负数)
+    incrbyfloat key increment  //将key中存储的数值加上increment(浮点数,increment可以是正数或负数)
     decr key  //将key中存储的数值减1
-    decrby key decrement  ///将key中存储的数值减去increment(整数)
+    decrby key decrement  ///将key中存储的数值减去increment(整数,increment可以是正数或负数)
  
  
  
  
  
  
- *  操作hash(哈希表)的相关命令:
+ *  操作hash(哈希表)的相关命令(hash是一个string类型的field和value的映射表):
  
     hset key field value  //将哈希表key中field的值设为value
     hsetnx key field value  //将哈希表key中field的值设为value当且仅当field不存在
@@ -89,15 +89,15 @@
     
     hdel key field [field ...]  //删除哈希表key中的一个或多个field,不存在的field将被忽略
     
-    hincrby key field increment  //为哈希表key中field对应的值加上增量increment(整数)
-    hincrbyfloat key field increment  //为哈希表key中field对应的值加上增量increment(浮点数)
+    hincrby key field increment  //为哈希表key中field对应的值加上增量increment(整数,increment可以是正数或负数)
+    hincrbyfloat key field increment  //为哈希表key中field对应的值加上增量increment(浮点数,increment可以是正数或负数)
  
  
  
  
  
  
- *  操作list(列表)的相关命令:
+ *  操作list(列表)的相关命令(list是简单的字符串列表):
     
     lpush key value [value ...]  //将一个或多个值value插入到列表key的表头(最左边)
     lpushx key value  //将值value插入到列表key的表头,当且仅当key存在并且是一个列表
@@ -125,3 +125,82 @@
     lindex key index  //返回列表key中,下标为index的元素
     lrange key start stop  //返回列表key中指定区间start-stop(包括start和stop)内的元素
     llen key  //返回列表key的长度
+    
+    
+    
+    
+      
+  
+ *  操作set(集合)的相关命令(set是String类型的无序集合):  
+ 
+    sadd key member [member ...]  //将一个或多个member元素加入到集合key当中,已经存在于集合的member元素将被忽略
+     
+    smembers keu  //返回集合key中的所有成员
+    scard key  //返回集合key的基数(集合中元素的数量)
+    sismember key member  //判断member元素是否集合key的成员
+    srandmember key [count]  //随机返回集合的元素
+        不指定count: 随机返回集合中的一个元素
+        count>0: 如果count小于集合基数,随机返回一个包含count个元素的数组,数组中的元素各不相同
+                 如果count大于等于集合基数,返回整个集合   
+        count<0: 随机返回一个数组,数组中的元素可能会重复出现多次,并且数组长度为count的绝对值
+    sscan key cusor [MATCH pattern] [COUNT count]  //迭代集合键中的元素
+        
+    srem key member [member ...]  //移除集合key中的一个或多个member元素,不存在的members元素会被忽略
+    spop key [count]  //从key中移除并返回count个随机元素,不设置count时移除并返回一个随机元素  
+    smove source destination member //将member元素从source集合移除并添加到destination集合
+    
+    sdiff key1 [key2 ...]  //返回一个集合的全部成员,该集合是所有给定集合之间的差集(key1-key2-...-keyn)
+    sdiffstore destination key1 [key2 ...]  //将所有给定集合之间的差集(key1-key2-...-keyn)保存到destination集合,如果destination已经存在则覆盖
+    sinter key [key ...]  //返回一个集合的全部成员,该集合是所有给定集合的交集
+    sinterstore destination key [key ...]  //将所有给定集合的交集保存到destination集合,如果destination已经存在则覆盖
+    sunion key [key ...]  //返回一个集合的全部成员,该集合是所有给定集合的并集
+    sunionstore destination key [key ...]  //将所有给定集合的并集保存到destination集合,如果destination已经存在则覆盖
+ 
+ 
+ 
+ 
+ 
+ 
+ *  操作sorted set(有序集合)的相关命令(set是String类型的有序集合,每个元素都会关联一个double类型的分数,通过分数进行排序): 
+    
+    zadd key score member [[score member] ...]  //将一个或多个member元素及其score值加入到有序集key当中
+    
+    zincrby key increment member  //为有序集key的成员member的score值加上增量increment(整数,increment可以是正数或负数)
+        key不存在或member不存时相当于zadd key increment member
+        
+    zrange key start stop [withscores]  //返回key中指定区间start-stop(包括start和stop)内的元素(按score值从小到大排序)
+    zrevrange key start stop [withscores]  //类似zrange,不同在于成员按score值从大到小排列
+    zrangebyscore key min max [withscores] [limit offset count]  //返回key中所有score值介于min和max之间(可以包括min和max也可以不包括)的成员(按score值从小到大排序)
+    zrevrangebyscore key max min [withscores] [limit offset count]  //类似zrangebyscore,不同在于min和max互换位置(实际上还是表示min-max区间),成员按score值从大到小排列
+    zscan key cusor [MATCH pattern] [COUNT count]  //迭代有序集合中的元素(包括member和score)
+    zcard key  //返回有序集key的基数
+    zscore key member  //返回有序集key中,成员member的score值
+    zcount key min max  //返回有序集key中,score值在min和max之间(包括min和max)的成员的数量
+    zrank key member  //返回有序集key中成员member的排名(从0开始,其中有序集成员按score值从小到大排列)
+    zrevrank key member  //类似zrank,不同在于有序集成员按score值从大到小排列
+    
+    zrem key member [member ...]  //移除有序集key中的一个或多个成员,不存在的成员将被忽略
+    zremrangebyrank key start stop  //移除有序集key中,排名(rank)在区间(start-stop之间包括start和stop)内的所有成员
+    zremrangebyscore key min max  //移除有序集key中,score值介于min和max之间(可以包括min和max也可以不包括)的成员
+    
+    zunionstore destination numkeys key [key ...] [WEIGHTS weight [weight ...]] [AGGREGATE SUM|MIN|MAX]  //计算给定的一个或多个有序集的并集存储到destination,destination存在则覆盖
+        numkeys: 给定 key 的数量
+        WEIGHTS: 每个给定有序集的所有成员的score值在传递给聚合函数(aggregation function)之前分别乘对应的weight
+        ARRREGATE: 
+            SUM: 将所有集合中某个成员的score值之和作为结果集中该成员的score值,默认为SUM
+            MAX: 将所有集合中某个成员的最大score值作为结果集中该成员的score值
+            MIN: 将所有集合中某个成员的最小score值作为结果集中该成员的score值
+    zinterstore destination numkeys key [key ...] [WEIGHTS weight [weight ...]] [AGGREGATE SUM|MIN|MAX] //类似zunionstore,不同在于计算的是交集
+ 
+    zrangebylex key min max [limit offset count]  //当有序集合的所有成员都具有相同的分值时,元素会根据成员的字典序来进行排序,返回key中member值介于min和max之间的member(可以包括min和max也可以不包括),如果有序集合里面的成员带有不同的分值,那么命令返回的结果是未指定的
+    zlexcount key min max  //类似zrangebylex,不同在于zlexcount是统计元素数量
+    zremrangebylex key min max  //类似zrangebylex,不同在于zremrangebylex是移除元素
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  
