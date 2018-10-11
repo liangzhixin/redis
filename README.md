@@ -18,9 +18,6 @@
  *  redis连接:
  * 	redis-cli -h host -p port -a password --raw	//连接到redis服务（--raw表示支持中文）
 
- *	序列化key的问题:
- *	dump key_name  //序列化key（以--raw连接时不会返回结果）
-
  *  redis的偏移量都是从0开始
  
  
@@ -29,8 +26,29 @@
  
     keys pattern    //查找符合模式pattern的key
     exists key      //检查key是否存在
+    type key        //返回key所储存的值的类型
     randomkey       //从数据库随机返回一个key(不删除)
-    ...
+    del key [key ...]  //删除给定的一个或多个key,不存在的key会被忽略
+    move key db  //将当前数据库的key移动到给定的数据库db当中
+    rename key newkey  //将key改名为newkey,当key和newkey相同,或者key不存在时返回一个错误,当newkey存在时则覆盖旧值
+    renamenx key newkey  //类似于rename,不同在于当且仅当newkey不存在时才重命名
+    
+    scan key cusor [MATCH pattern] [COUNT count]  //迭代当前数据库中的数据库键key
+    
+    expire key seconds  //为给定key设置生存时间(以秒为单位),当key过期时(生存时间为0),它会被自动删除
+    expireat key timestamp  //类似expire,不同在于接受的时间参数是UNIX时间戳
+    pexpire key millseconds  //类似expire,不同在于以毫秒为单位
+    pexpureat key milliseconds-timestamp  //类似expireat,不同在于以毫秒为单位
+    ttl key  //以秒为单位返回key的剩余生存时间
+    pttl key  //以毫秒为单位返回key的剩余生存时间
+    persist key  //移除给定key的生存时间
+    
+    dump key //序列化指定key(以--raw连接时不会返回结果)
+    restore key seconds serialized-value [replace]  //详见http://redisdoc.com/
+    
+    sort  //详见http://redisdoc.com/
+    migrate  //详见http://redisdoc.com/
+    object  //详见http://redisdoc.com/
     
     
     
