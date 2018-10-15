@@ -9,6 +9,22 @@
  
  
  
+ 
+ 
+ 
+ 数据类型介绍:
+  
+ *  string(字符串) : string类型是最简单的一种key－value结构,但其可存储的值不仅限于字符串,也可以是数字、序列化的对象等任何类型的数据
+ *  hash(哈希表) : hash是一个string类型的field和value的映射表
+ *  list(列表) : list是简单的字符串列表
+ *  set(集合) : set是String类型的无序集合
+ *  sorted set(有序集合) : sorted set是String类型的有序集合,每个元素都会关联一个double类型的分数,通过分数进行排序
+ 
+ 
+ 
+ 
+ 
+ 
  注意以下问题:
  
  *  启动方式1：redis-server D:\Redis\redis.windows.conf  //启动的时候指定配置文件
@@ -23,6 +39,9 @@
  *  migrate在redis开启密码验证下运行会报错,应该去掉密码验证后再使用
  
  *  dump序列化key时,client以--raw连接时不会返回结果
+
+ 
+ 
  
  
  
@@ -32,6 +51,7 @@
  *  bind 127.0.0.1  //Redis的默认配置会接受来自任何地址发送来的请求.即在任何一个拥有公网IP的服务器上启动Redis服务器,都可以被外界直接访问到.
                       这里设置为只允许本机应用连接Redis
  *  ... 
+ 
  
  
  
@@ -194,7 +214,7 @@
  
  
  
- *  操作sorted set(有序集合)的相关命令(set是String类型的有序集合,每个元素都会关联一个double类型的分数,通过分数进行排序): 
+ *  操作sorted set(有序集合)的相关命令(sorted set是String类型的有序集合,每个元素都会关联一个double类型的分数,通过分数进行排序): 
     
     zadd key score member [[score member] ...]  //将一个或多个member元素及其score值加入到有序集key当中
     
@@ -228,6 +248,13 @@
     zrangebylex key min max [limit offset count]  //当有序集合的所有成员都具有相同的分值时,元素会根据成员的字典序来进行排序,返回key中member值介于min和max之间的member(可以包括min和max也可以不包括),如果有序集合里面的成员带有不同的分值,那么命令返回的结果是未指定的
     zlexcount key min max  //类似zrangebylex,不同在于zlexcount是统计元素数量
     zremrangebylex key min max  //类似zrangebylex,不同在于zremrangebylex是移除元素
+ 
+ 
+ 
+ 
+ 
+
+ 
  
  
  
