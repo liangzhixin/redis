@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: demo
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    database: 5
+    timeout: 10000ms
+    jedis:
+      pool:
+        # 连接池最大连接数(使用负值表示没有限制)
+        max-active: 8
+        # 在池耗尽时,在抛出异常之前连接分配应该阻塞的最长时间。使用负值无限期阻止
+        max-wait: -1ms
+        # 池中“空闲”连接的最大数量(使用负值表示没有限制)
+        max-idle: 8
+        # 池中维护的最小空闲连接数(此设置仅在其为正时才有效)
+        min-idle: 2
+
+server:
+  port: 1001
+
+
+
+
+
+
+
+
+
+
+
