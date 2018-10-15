@@ -289,7 +289,7 @@
         //withhash: 以52位有符号整数的形式,返回位置元素经过原始geohash编码的有序集合分值(实际作用不大)
     georadiusbymember key member radius m|km|ft|mi [withcoord] [withdist] [withhash] [asc|desc] [COUNT count]
         //类似georadius,不同在于georadiusbymember中心点是一个位置元素,而不是由经度纬度来决定
-    geohash key member [member ...]  //返回一个或多个位置元素的Geohash表示
+    geohash key member [member ...]  //返回一个或多个位置元素的Geohash表示(了解即可)
  
  
  
