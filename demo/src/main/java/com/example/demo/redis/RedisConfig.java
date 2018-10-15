@@ -94,7 +94,7 @@ public class RedisConfig {
      *              使用GenericJackson2JsonRedisSerializer进行序列化value,hash value(使用jackson2将对象序列化为json)
      *      1.string,hash,list,set,sorted set存取均无问题,存入redis时无乱码
      *      2.存取Object均无问题,并且可以转化为User以及其他对象类型
-     *      3.序列化后的内容存储了对象的Class信息,一个实例可以操作多个对象的反序列化,不止是User
+     *      3.序列化后的内容存储了对象的Class信息,可以操作多个对象的反序列化,不止是User
      */
     @Bean
     public RedisTemplate<String, String> redisTemplate(
