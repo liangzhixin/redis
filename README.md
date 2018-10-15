@@ -253,11 +253,43 @@
  
  
  
-
+ 
+ *  HyperLogLog(实际上是string类型)
+    
+    1.用来做基数统计的算法(返回的基数并不是精确值,而是一个带有0.81%标准错误的近似值)
+    2.在输入元素的数量或者体积非常非常大时,计算基数所需的空间总是固定的并且是很小的(每个HyperLogLog键只需要花费12KB内存,就可以计算接近2^64个不同元素的基数)
+    3.因为HyperLogLog只会根据输入元素来计算基数,而不会储存输入元素本身,所以HyperLogLog不能像集合那样,返回输入的各个元素
+ 
+    pfadd key element [element ...]  //将任意数量的元素添加到指定的HyperLogLog里面
+    pfcount key [key ...]  
+        //当pfcount命令作用于单个键时,返回储存在给定键的HyperLogLog的近似基数,如果键不存在,那么返回0
+        //当pfcount命令作用于多个键时,返回所有给定HyperLogLog的并集的近似基数
+    pfmerge destkey sourcekey [sourcekey ...]  
+        //将多个HyperLogLog合并为一个HyperLogLog,合并后的HyperLogLog的基数接近于所有输入HyperLogLog的并集
+        //如果destkey不存在则创建,如果destkey存在则将destkey也一起合并
  
  
  
  
+ 
+ 
+ *  GEO(地理位置,实际上是zset类型)
+ 
+    geoadd key longitude latitude member [longitude latitude member ...]  
+        //将给定的空间元素(纬度、经度、名字)添加到指定的键里面
+        //数据会以有序集合的形式被储存在key中,分数值是位置元素经过原始geohash编码的有序集合分值(也就是georadius命令的withhash选项所显示的值)
+    geopos key member [member ...]  //从键里面返回所有给定位置元素的位置(经度和纬度)
+    geodist key member1 member2 [unit]  
+        //返回两个给定位置之间的距离
+        //unit: m,km,mi(英里),ft(英尺),不写默认为m
+    georadius key longitude latitude radius m|km|ft|mi [withcoord] [withdist] [withhash] [asc|desc] [COUNT count]
+        //以给定的经纬度为中心,返回键包含的位置元素当中,与中心的距离不超过给定最大距离的所有位置元素
+        //withcoord: 将位置元素的经度纬度一并返回
+        //withdist: 将位置元素与中心元素的距离一并返回
+        //withhash: 以52位有符号整数的形式,返回位置元素经过原始geohash编码的有序集合分值(实际作用不大)
+    georadiusbymember key member radius m|km|ft|mi [withcoord] [withdist] [withhash] [asc|desc] [COUNT count]
+        //类似georadius,不同在于georadiusbymember中心点是一个位置元素,而不是由经度纬度来决定
+    geohash key member [member ...]  //返回一个或多个位置元素的Geohash表示
  
  
  
