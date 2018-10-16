@@ -1,6 +1,11 @@
 spring:
   application:
     name: demo
+  datasource:
+    username: root
+    password: root
+    url:  jdbc:mysql://localhost:3306/
+    driver-class-name: com.mysql.jdbc.Driver
   redis:
     host: localhost
     port: 6379

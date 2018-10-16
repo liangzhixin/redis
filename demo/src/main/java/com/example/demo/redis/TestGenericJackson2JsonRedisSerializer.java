@@ -32,22 +32,22 @@ public class TestGenericJackson2JsonRedisSerializer {
         stu.setAge(20);
         stu.setGender("male");
 
-//        //测试string,存取无问题,存进reids之后以json格式字符串存储Object(包括对象的Class信息),转化为User或Stu以及其他对象类型也没问题
-//        log.info(">>>>>>>>>>>>>>>>>>string start...");
+        //测试string,存取无问题,存进reids之后以json格式字符串存储Object(包括对象的Class信息),转化为User或Stu以及其他对象类型也没问题
+        log.info(">>>>>>>>>>>>>>>>>>string start...");
 
-//        redisTemplate.opsForValue().set("obj_user",user);
-//        Object obj = redisTemplate.opsForValue().get("obj_user");
-//        log.info("string get obj_user:" + JSON.toJSONString(obj));
-//        user = (User) redisTemplate.opsForValue().get("obj_user");
-//        log.info("string get obj_user:" + JSON.toJSONString(user));
-//
-//        redisTemplate.opsForValue().set("obj_stu",stu);
-//        obj = redisTemplate.opsForValue().get("obj_stu");
-//        log.info("string get obj_stu:" + JSON.toJSONString(obj));
-//        stu = (Student) redisTemplate.opsForValue().get("obj_stu");
-//        log.info("string get obj_stu:" + JSON.toJSONString(stu));
-//
-//        log.info(">>>>>>>>>>>>>>>>>>string end...");
+        redisTemplate.opsForValue().set("obj_user",user);
+        Object obj = redisTemplate.opsForValue().get("obj_user");
+        log.info("string get obj_user:" + JSON.toJSONString(obj));
+        user = (User) redisTemplate.opsForValue().get("obj_user");
+        log.info("string get obj_user:" + JSON.toJSONString(user));
+
+        redisTemplate.opsForValue().set("obj_stu",stu);
+        obj = redisTemplate.opsForValue().get("obj_stu");
+        log.info("string get obj_stu:" + JSON.toJSONString(obj));
+        stu = (Student) redisTemplate.opsForValue().get("obj_stu");
+        log.info("string get obj_stu:" + JSON.toJSONString(stu));
+
+        log.info(">>>>>>>>>>>>>>>>>>string end...");
 
 
 
@@ -117,24 +117,24 @@ public class TestGenericJackson2JsonRedisSerializer {
 
 
 
-        //测试sorted set,存取无问题,存进reids之后以json格式字符串存储Object(包括对象的Class信息),转化为User或Stu以及其他对象类型也没问题
-        log.info(">>>>>>>>>>>>>>>>>>sorted set start...");
-
-        redisTemplate.opsForZSet().add("obj_user_sorted_set",user,3.0);
-        Set set = redisTemplate.opsForZSet().range("obj_user_sorted_set",0,-1);
-        log.info("string get sorted set:" + set);
-        Set<User> userSet = redisTemplate.opsForZSet().range("obj_user_sorted_set",0,-1);
-        for (User u : userSet) {
-            log.info("u:" + JSON.toJSONString(u));
-        }
-
-        redisTemplate.opsForZSet().add("obj_stu_sorted_set",stu,3.0);
-        set = redisTemplate.opsForZSet().range("obj_stu_sorted_set",0,-1);
-        log.info("string get sorted set:" + set);
-        Set<Student> stuSet = redisTemplate.opsForZSet().range("obj_stu_sorted_set",0,-1);
-        for (Student s : stuSet) {
-            log.info("s:" + JSON.toJSONString(s));
-        }
-        log.info(">>>>>>>>>>>>>>>>>>sorted set end...");
+//        //测试sorted set,存取无问题,存进reids之后以json格式字符串存储Object(包括对象的Class信息),转化为User或Stu以及其他对象类型也没问题
+//        log.info(">>>>>>>>>>>>>>>>>>sorted set start...");
+//
+//        redisTemplate.opsForZSet().add("obj_user_sorted_set",user,3.0);
+//        Set set = redisTemplate.opsForZSet().range("obj_user_sorted_set",0,-1);
+//        log.info("string get sorted set:" + set);
+//        Set<User> userSet = redisTemplate.opsForZSet().range("obj_user_sorted_set",0,-1);
+//        for (User u : userSet) {
+//            log.info("u:" + JSON.toJSONString(u));
+//        }
+//
+//        redisTemplate.opsForZSet().add("obj_stu_sorted_set",stu,3.0);
+//        set = redisTemplate.opsForZSet().range("obj_stu_sorted_set",0,-1);
+//        log.info("string get sorted set:" + set);
+//        Set<Student> stuSet = redisTemplate.opsForZSet().range("obj_stu_sorted_set",0,-1);
+//        for (Student s : stuSet) {
+//            log.info("s:" + JSON.toJSONString(s));
+//        }
+//        log.info(">>>>>>>>>>>>>>>>>>sorted set end...");
     }
 }
