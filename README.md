@@ -3,7 +3,7 @@
  *  redis优势:
  *  1.性能极高 - Redis能读的速度是110000次/s,写的速度是81000次/s
  *  2.丰富的数据类型 - 支持string,list,set,zset,hash等数据结构的存储
- *  3.原子性 - 单个操作是原子性的,多个操作也支持事务(即原子性)
+ *  3.原子性 - 单个操作是原子性的,redis事务也是原子性的
  *  4.丰富的特性 - Redis还支持publish/subscribe,通知,key过期等等特性
  *  5.支持数据的持久化以及数据的备份
  
@@ -296,3 +296,55 @@
  
  
   
+ *  Pub/Sub(发布/订阅)
+ 
+    subscribe channel [channel ...]  //订阅给定的一个或多个频道的信息
+    psubscribe pattern [pattern ...]  //订阅一个或多个符合给定模式的频道
+    unsubscribe channel [channel ...]  //指示客户端退订给定的频道,如果没有参数被指定,那么退订所有使用subscribe命令订阅的频道
+    punsubscribe pattern [pattern ...]  //指示客户端退订给定模式,如果没有参数被指定,那么退订所有使用psubscribe命令订阅的模式
+    publish channel message  //将信息message发送到指定的频道channel
+    
+    pubsub channels [pattern]  //列出当前的活跃频道(指的是那些至少有一个订阅者的频道,订阅模式的客户端不计算在内)
+        //如果不指定pattern,列出所有订阅与发布系统中的所有活跃频道
+        //如果指定pattern,只列出与pattern匹配的活跃频道
+    pubsub numsub channel [channel ...]  //返回给定频道的订阅者数量,订阅模式的客户端不计算在内
+    pubsub numpat  //返回订阅模式的数量(当有多个客户端订阅相同的模式时,相同的订阅也被计算在内)
+   
+    注意: 使用redis-cli订阅channel后,该客户端将不能响应任何命令.除非按下(ctrl+c)但该操作不是取消订阅,而是退出redis-cli
+   
+   
+   
+   
+   
+ 
+ *  Transaction(事务)
+ 
+    redis中的事务特点:
+    
+        1.并不像mysql中那么完美,只是简单的保证了原子性,并且不支持回滚(详见http://redisdoc.com/topic/transaction.html)
+        2.批量操作在发送exec命令前被放入队列缓存
+        3.收到exec命令后进入事务执行,事务中任意命令失败,其余的命令仍然执行(不支持回滚)
+        4.在事务执行过程中,其他客户端提交的命令请求不会插入到事务执行命令序列中
+        
+    multi    //标记一个事务块的开始
+    exec     //执行所有事务块内的命令
+    discard  //取消事务,放弃执行事务块内的所有命令
+    watch    //监视一个(或多个)key,如果在事务执行(exec)之前这些key被其他命令所改动,那么事务将被打断
+    unwatch  //取消watch命令对所有key的监视(exec,discard命令执行之后不需要执行)
+    
+    watch命令的实现详见https://redisbook.readthedocs.io/en/latest/feature/transaction.html
+    
+     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

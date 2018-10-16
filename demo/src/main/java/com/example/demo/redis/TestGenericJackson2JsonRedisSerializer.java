@@ -11,6 +11,9 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * 测试redisTemplate使用GenericJackson2JsonRedisSerializer进行序列化
+ */
 //@Component
 @Slf4j
 public class TestGenericJackson2JsonRedisSerializer {
