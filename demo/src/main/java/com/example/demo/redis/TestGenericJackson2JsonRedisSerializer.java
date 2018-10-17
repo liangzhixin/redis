@@ -2,14 +2,12 @@ package com.example.demo.redis;
 
 import com.alibaba.fastjson.JSON;
 import com.example.demo.entity.Student;
+import com.example.demo.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-
-import java.util.List;
-import java.util.Set;
 
 /**
  * 测试redisTemplate使用GenericJackson2JsonRedisSerializer进行序列化
