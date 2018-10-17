@@ -14,11 +14,19 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class RedisConfig {
 
     /**
+     * 我们这里使用的是Jedis Client:
+     *
+     *  1.我们只需要配置redis相关属性,springboot会帮我们创建一个JedisConnectionFactory redisConnectionFactory的bean  //查看JedisConnectionConfiguration源码
+     *  2.我们也可以自己创建JedisConnectionFactory
+     *  这个JedisConnectionFactory供我们创建的或springboot创建的redisTemplate和stringRedisTemplate使用
+     *
+     *
+     *
      * 默认创建redisTemplate和stringRedisTemplate两个模板  //查看RedisAutoConfiguration源码
-     * redisTemplate
+     *  1.redisTemplate
      *      1.默认使用JdkSerializationRedisSerializer进行序列化  //查看RedisTemplate源码
      *      2.string,hash,list,set,sorted set存取均无问题,存入redis时key和value均是乱码,sorted set分数值没有问题
-     * stringRedisTemplate
+     *  2.stringRedisTemplate
      *      1.默认使用RedisSerializer<String>(即StringRedisSerializer)进行序列化(序列化String类型的key和value,非String类型会报错)  //查看StringRedisTemplate源码
      *      2.string,hash,list,set,sorted set存取均无问题,存入redis时无乱码
      *
