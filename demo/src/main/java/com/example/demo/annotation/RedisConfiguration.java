@@ -93,7 +93,7 @@ public class RedisConfiguration {
 
         Map<String,RedisCacheConfiguration> configMap = new HashMap<>();
         configMap.put("user", config);
-        configMap.put("stu", config.entryTtl(Duration.ofMillis(5000)));
+        configMap.put("stu", config.entryTtl(Duration.ofMillis(-1)));
         configMap.put("tea", config.entryTtl(Duration.ofMillis(-1)));
 
         return RedisCacheManager.builder(jedisConnectionFactory)
