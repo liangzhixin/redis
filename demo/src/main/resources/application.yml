@@ -1,27 +1,37 @@
 spring:
   application:
     name: demo
-#  datasource:
-#    username: root
-#    password: root
-#    url:  jdbc:mysql://localhost:3306/
-#    driver-class-name: com.mysql.jdbc.Driver
+  datasource:
+    username: root
+    password: root
+    url:  jdbc:mysql://localhost:3306/redis
+    driver-class-name: com.mysql.jdbc.Driver
   redis:
     host: localhost
     port: 6379
     password:
-    database: 5
-    timeout: 10000ms
+    database: 6
+    # 实际上connectTimeout(建立连接所用时间)和readTimeout(建立连接后从服务器读取到可用资源所用的时间)都设置的是这个值
+    timeout: 10000
     jedis:
       pool:
         # 连接池最大连接数(使用负值表示没有限制)
-        max-active: 8
+        max-active: 5
         # 在池耗尽时,在抛出异常之前连接分配应该阻塞的最长时间。使用负值无限期阻止
-        max-wait: -1ms
+        max-wait: -1
         # 池中“空闲”连接的最大数量(使用负值表示没有限制)
-        max-idle: 8
+        max-idle: 3
         # 池中维护的最小空闲连接数(此设置仅在其为正时才有效)
-        min-idle: 2
+        min-idle: 1
+  cache:
+    redis:
+      time-to-live: 10000
+#      cache-null-values: true
+#      key-prefix: demo
+#    cache-names: stu,tea,user
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
 
 server:
   port: 1001

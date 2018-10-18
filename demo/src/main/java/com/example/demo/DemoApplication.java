@@ -14,11 +14,9 @@ public class DemoApplication {
     public static void main(String[] args) {
 
         ConfigurableApplicationContext context = SpringApplication.run(DemoApplication.class, args);
-        String[] beanNames = context.getBeanDefinitionNames();
-        for (String beanName : beanNames){
-            System.out.println(beanName);
-        }
-        Object obj = context.getBean("redisConnectionFactory");
-        System.out.println(obj);
+//        String[] beanNames = context.getBeanDefinitionNames();
+//        for (String beanName : beanNames){
+//            System.out.println(beanName + "=====" + context.getBean(beanName));
+//        }
     }
 }

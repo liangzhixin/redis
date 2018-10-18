@@ -19,6 +19,7 @@ public class Test {
         log.info("port:" + redisProperties.getPort());
         log.info("password:" + redisProperties.getPassword());
         log.info("database:" + redisProperties.getDatabase());
+        log.info("timeout:" + redisProperties.getTimeout());
         log.info("max-active:" + redisProperties.getJedis().getPool().getMaxActive());
         log.info("max-wait:" + redisProperties.getJedis().getPool().getMaxWait());
         log.info("max-idle:" + redisProperties.getJedis().getPool().getMaxIdle());

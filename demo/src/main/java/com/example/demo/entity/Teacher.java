@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
-public class Teacher {
+import java.io.Serializable;
+
+public class Teacher implements Serializable {
 
     private Integer id;
     private String name;
