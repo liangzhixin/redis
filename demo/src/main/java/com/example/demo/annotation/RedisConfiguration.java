@@ -103,9 +103,9 @@ public class RedisConfiguration {
     }
 
     @Bean
-    public RedisTemplate<String, String> redisTemplate(
+    public RedisTemplate<String, Object> redisTemplate(
             JedisConnectionFactory jedisConnectionFactory){
-        RedisTemplate<String, String> template = new RedisTemplate<>();
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
         GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer =
                 new GenericJackson2JsonRedisSerializer();

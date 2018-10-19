@@ -39,6 +39,18 @@ public class RedisConfig {
      *      2.string,hash,list,set,sorted set存取均无问题,存入redis时无乱码
      *
      *      redisTemplate和stringRedisTemplate二者默认的序列化器均不能序列化Object
+     *
+     *
+     *
+     *
+     * 自定义RedisTemplate注意:
+     * 1.RedisTemplate<String, Object>的泛型(目前感觉使用RedisTemplate<String, Object>会好一点):
+     *      String: 代表所能存储的key的类型
+     *      Object: 代表所能存储的value的类型
+     * 2.注入redisTemplate的时候最好加上泛型(不然有警告,强迫症):
+     *      @Autowired
+     *      private RedisTemplate<String,Object> redisTemplate;
+     *
      */
 
 
