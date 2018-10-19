@@ -1,4 +1,4 @@
-# redis（更多命令见http://redisdoc.com/）
+# redis(更多命令见http://redisdoc.com/)
 
  *  redis优势:
  *  1.性能极高 - Redis能读的速度是110000次/s,写的速度是81000次/s
