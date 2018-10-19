@@ -66,8 +66,8 @@ public class RedisConfiguration {
 //                .disableCachingNullValues()  //不缓存空值,对应属性spring.cache.redis.cache-null-values
 ////                .prefixKeysWith(keyPrefix)  //效果自己测试,对应属性spring.cache.redis.key-prefix,应该不怎么使用
 //                .computePrefixWith(cacheName -> applicationName.concat(":").concat(cacheName).concat(":"))  ////设置key的前缀
-//                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))  //设置key的序列化方式
-//                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));  //设置value的序列化方式
+//                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))  //设置key和hash-key的序列化方式
+//                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));  //设置value和hash-value的序列化方式
 //
 //        return RedisCacheManager.builder(jedisConnectionFactory)
 //                .cacheDefaults(config)
@@ -83,8 +83,8 @@ public class RedisConfiguration {
                 .entryTtl(Duration.ofMinutes(Long.parseLong(timeToLive)))  //设置过期时间
                 .disableCachingNullValues()  //不缓存空值
                 .computePrefixWith(cacheName -> applicationName.concat(":").concat(cacheName).concat(":"))  ////设置key的前缀
-                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))  //设置key的序列化方式
-                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));  //设置value的序列化方式
+                .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))  //设置key和hash-key的序列化方式
+                .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));  //设置value和hash-value的序列化方式
 
         Set<String> cacheNames = new HashSet<>();
         cacheNames.add("user");
