@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="437c5128-00f6-4469-a536-6d23d42e226d" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/service/TeacherService.java" beforeDir="false" afterPath="$PROJECT_DIR$/demo/src/main/java/com/example/demo/service/TeacherService.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/demo/target/" />
@@ -24,7 +23,7 @@
       <file leaf-file-name="RedisConfiguration.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/demo/src/main/java/com/example/demo/annotation/RedisConfiguration.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
+            <state relative-caret-position="133">
               <caret line="83" column="41" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -36,8 +35,8 @@
       <file leaf-file-name="TeacherService.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/demo/src/main/java/com/example/demo/service/TeacherService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="60" column="14" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
+            <state relative-caret-position="117">
+              <caret line="25" column="28" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -463,7 +462,7 @@
       <workItem from="1539170216281" duration="46526000" />
       <workItem from="1539336044669" duration="60442000" />
       <workItem from="1539755328239" duration="50559000" />
-      <workItem from="1539908825427" duration="1063000" />
+      <workItem from="1539908825427" duration="1760000" />
     </task>
     <task id="LOCAL-00001" summary="init">
       <created>1539087660532</created>
@@ -476,9 +475,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Test - 2018.10.19 at 08h 30m 13s.xml">
-      <configuration name="Test" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="Test - 2018.10.19 at 08h 30m 56s.xml">
       <configuration name="Test" configurationId="JUnit" />
     </history-entry>
@@ -506,9 +502,12 @@
     <history-entry file="Test - 2018.10.19 at 08h 44m 50s.xml">
       <configuration name="Test" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="Test - 2018.10.19 at 08h 45m 09s.xml">
+      <configuration name="Test" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="167878000" />
+    <option name="totallyTimeSpent" value="168575000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
@@ -534,9 +533,9 @@
       <window_info anchor="bottom" id="Java Enterprise" order="16" weight="0.32918397" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Version Control" order="11" weight="0.32226834" />
-      <window_info active="true" anchor="bottom" id="Run" order="7" sideWeight="0.49927744" visible="true" weight="0.4550484" />
+      <window_info anchor="bottom" id="Run" order="7" sideWeight="0.49927744" weight="0.4550484" />
       <window_info anchor="bottom" id="Spring" order="4" weight="0.32918397" />
-      <window_info anchor="bottom" id="Terminal" order="12" weight="0.5117566" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="12" visible="true" weight="0.5117566" />
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4945946" visible="true" weight="0.26950866" />
       <window_info anchor="bottom" id="Problems" order="15" />
       <window_info anchor="right" id="Bean Validation" order="8" />
@@ -914,16 +913,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/demo/src/main/java/com/example/demo/annotation/RedisConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="83" column="41" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="41" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/demo/src/test/java/com/example/demo/Test.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="55">
@@ -948,10 +937,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/demo/src/main/java/com/example/demo/annotation/RedisConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="83" column="41" selection-start-line="83" selection-start-column="17" selection-end-line="83" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/demo/src/main/java/com/example/demo/service/TeacherService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="60" column="14" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
+        <state relative-caret-position="117">
+          <caret line="25" column="28" selection-start-line="25" selection-start-column="28" selection-end-line="25" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
