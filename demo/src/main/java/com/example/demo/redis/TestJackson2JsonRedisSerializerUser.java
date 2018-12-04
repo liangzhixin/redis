@@ -34,7 +34,7 @@ public class TestJackson2JsonRedisSerializerUser {
 //        Object obj = redisTemplate.opsForValue().get("obj_user");
 //        log.info("string get obj_user:" + JSON.toJSONString(obj));
 //
-//        user = (User) redisTemplate.opsForValue().get("obj_user");
+//        user = redisTemplate.opsForValue().get("obj_user");
 //        log.info("string get obj_user:" + JSON.toJSONString(user));
 //        log.info(">>>>>>>>>>>>>>>>>>string end...");
 

@@ -105,21 +105,22 @@ public class RedisConfig {
      *              使用Jackson2JsonRedisSerializer<User>进行序列化value,hash value(使用jackson2将对象序列化为json)
      *      1.string,hash,list,set,sorted set存取均无问题,存入redis时无乱码
      *      2.存取Object均无问题,并且可以转化为User
+     *      3.存取对象时该类不需要实现序列化接口
      */
-    @Bean
-    public RedisTemplate<String, User> redisTemplate(
-            RedisConnectionFactory redisConnectionFactory){
-        RedisTemplate<String, User> template = new RedisTemplate<>();
-        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-        Jackson2JsonRedisSerializer<User> jackson2JsonRedisSerializer =
-                new Jackson2JsonRedisSerializer<>(User.class);
-        template.setConnectionFactory(redisConnectionFactory);
-        template.setKeySerializer(stringRedisSerializer);   //key序列化
-        template.setValueSerializer(jackson2JsonRedisSerializer); //value序列化
-        template.setHashKeySerializer(stringRedisSerializer);   //hash key序列化
-        template.setHashValueSerializer(jackson2JsonRedisSerializer); //hash value序列化
-        return template;
-    }
+//    @Bean
+//    public RedisTemplate<String, User> redisTemplate(
+//            RedisConnectionFactory redisConnectionFactory){
+//        RedisTemplate<String, User> template = new RedisTemplate<>();
+//        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+//        Jackson2JsonRedisSerializer<User> jackson2JsonRedisSerializer =
+//                new Jackson2JsonRedisSerializer<>(User.class);
+//        template.setConnectionFactory(redisConnectionFactory);
+//        template.setKeySerializer(stringRedisSerializer);   //key序列化
+//        template.setValueSerializer(jackson2JsonRedisSerializer); //value序列化
+//        template.setHashKeySerializer(stringRedisSerializer);   //hash key序列化
+//        template.setHashValueSerializer(jackson2JsonRedisSerializer); //hash value序列化
+//        return template;
+//    }
 
 
 
@@ -129,21 +130,22 @@ public class RedisConfig {
      *      1.string,hash,list,set,sorted set存取均无问题,存入redis时无乱码
      *      2.存取Object均无问题,并且可以转化为User以及其他对象类型
      *      3.序列化后的内容存储了对象的Class信息,可以操作多个对象的反序列化,不止是User
+     *      4.存取对象时该类不需要实现序列化接口
      */
-//    @Bean
-//    public RedisTemplate<String, String> redisTemplate(
-//            RedisConnectionFactory redisConnectionFactory){
-//        RedisTemplate<String, String> template = new RedisTemplate<>();
-//        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-//        GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer =
-//                new GenericJackson2JsonRedisSerializer();
-//        template.setConnectionFactory(redisConnectionFactory);
-//        template.setKeySerializer(stringRedisSerializer);   //key序列化
-//        template.setValueSerializer(genericJackson2JsonRedisSerializer); //value序列化
-//        template.setHashKeySerializer(stringRedisSerializer);   //hash key序列化
-//        template.setHashValueSerializer(genericJackson2JsonRedisSerializer); //hash value序列化
-//        return template;
-//    }
+    @Bean
+    public RedisTemplate<String, Object> redisTemplate(
+            RedisConnectionFactory redisConnectionFactory){
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
+        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+        GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer =
+                new GenericJackson2JsonRedisSerializer();
+        template.setConnectionFactory(redisConnectionFactory);
+        template.setKeySerializer(stringRedisSerializer);   //key序列化
+        template.setValueSerializer(genericJackson2JsonRedisSerializer); //value序列化
+        template.setHashKeySerializer(stringRedisSerializer);   //hash key序列化
+        template.setHashValueSerializer(genericJackson2JsonRedisSerializer); //hash value序列化
+        return template;
+    }
 
 
 

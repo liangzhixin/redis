@@ -17,10 +17,10 @@ import org.springframework.stereotype.Component;
 public class TestGenericJackson2JsonRedisSerializer {
 
     @Autowired
-    private RedisTemplate<String,Object> redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Scheduled(cron = "0/3 * * * * ?")
-    public void test(){
+    public void test() {
         User user = new User();
         user.setName("zhangsan");
         user.setAge(18);
@@ -33,13 +33,13 @@ public class TestGenericJackson2JsonRedisSerializer {
 //        //测试string,存取无问题,存进reids之后以json格式字符串存储Object(包括对象的Class信息),转化为User或Stu以及其他对象类型也没问题
 //        log.info(">>>>>>>>>>>>>>>>>>string start...");
 //
-//        redisTemplate.opsForValue().set("obj_user",user);
+//        redisTemplate.opsForValue().set("obj_user", user);
 //        Object obj = redisTemplate.opsForValue().get("obj_user");
 //        log.info("string get obj_user:" + JSON.toJSONString(obj));
 //        user = (User) redisTemplate.opsForValue().get("obj_user");
 //        log.info("string get obj_user:" + JSON.toJSONString(user));
 //
-//        redisTemplate.opsForValue().set("obj_stu",stu);
+//        redisTemplate.opsForValue().set("obj_stu", stu);
 //        obj = redisTemplate.opsForValue().get("obj_stu");
 //        log.info("string get obj_stu:" + JSON.toJSONString(obj));
 //        stu = (Student) redisTemplate.opsForValue().get("obj_stu");
@@ -48,23 +48,21 @@ public class TestGenericJackson2JsonRedisSerializer {
 //        log.info(">>>>>>>>>>>>>>>>>>string end...");
 
 
-
-        //测试hash,存取无问题,存进reids之后以json格式字符串存储Object(包括对象的Class信息),转化为User或Stu以及其他对象类型也没问题
-        log.info(">>>>>>>>>>>>>>>>>>hash start...");
-
-        redisTemplate.opsForHash().put("obj_user_hash","user1", user);
-        Object obj = redisTemplate.opsForHash().get("obj_user_hash","user1");
-        log.info("string get hash:" + JSON.toJSONString(obj));
-        User u = (User) redisTemplate.opsForHash().get("obj_user_hash","user1");
-        log.info("string get hash:" + JSON.toJSONString(u));
-
-        redisTemplate.opsForHash().put("obj_stu_hash","stu1", stu);
-        obj = redisTemplate.opsForHash().get("obj_stu_hash","stu1");
-        log.info("string get hash:" + JSON.toJSONString(obj));
-        stu = (Student) redisTemplate.opsForHash().get("obj_stu_hash","stu1");
-        log.info("string get hash:" + JSON.toJSONString(stu));
-        log.info(">>>>>>>>>>>>>>>>>>hash end...");
-
+//        //测试hash,存取无问题,存进reids之后以json格式字符串存储Object(包括对象的Class信息),转化为User或Stu以及其他对象类型也没问题
+//        log.info(">>>>>>>>>>>>>>>>>>hash start...");
+//
+//        redisTemplate.opsForHash().put("obj_user_hash","user1", user);
+//        Object obj = redisTemplate.opsForHash().get("obj_user_hash","user1");
+//        log.info("string get hash:" + JSON.toJSONString(obj));
+//        User u = (User) redisTemplate.opsForHash().get("obj_user_hash","user1");
+//        log.info("string get hash:" + JSON.toJSONString(u));
+//
+//        redisTemplate.opsForHash().put("obj_stu_hash","stu1", stu);
+//        obj = redisTemplate.opsForHash().get("obj_stu_hash","stu1");
+//        log.info("string get hash:" + JSON.toJSONString(obj));
+//        stu = (Student) redisTemplate.opsForHash().get("obj_stu_hash","stu1");
+//        log.info("string get hash:" + JSON.toJSONString(stu));
+//        log.info(">>>>>>>>>>>>>>>>>>hash end...");
 
 
 //        //测试list,存取无问题,存进reids之后以json格式字符串存储Object(包括对象的Class信息),转化为User或Stu以及其他对象类型也没问题
@@ -91,7 +89,6 @@ public class TestGenericJackson2JsonRedisSerializer {
 //        log.info(">>>>>>>>>>>>>>>>>>list end...");
 
 
-
 //        //测试set,存取无问题,存进reids之后以json格式字符串存储Object(包括对象的Class信息),转化为User或Stu以及其他对象类型也没问题
 //        log.info(">>>>>>>>>>>>>>>>>>set start...");
 //
@@ -112,7 +109,6 @@ public class TestGenericJackson2JsonRedisSerializer {
 //        }
 //
 //        log.info(">>>>>>>>>>>>>>>>>>set end...");
-
 
 
 //        //测试sorted set,存取无问题,存进reids之后以json格式字符串存储Object(包括对象的Class信息),转化为User或Stu以及其他对象类型也没问题

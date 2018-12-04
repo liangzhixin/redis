@@ -2,7 +2,7 @@ package com.example.demo.entity;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class User{
 
     private String name;
     private Integer age;
