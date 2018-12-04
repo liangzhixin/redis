@@ -38,7 +38,8 @@ public class RedisConfig {
      *      1.默认使用RedisSerializer<String>(即StringRedisSerializer)进行序列化(序列化String类型的key和value,非String类型会报错)  //查看StringRedisTemplate源码
      *      2.string,hash,list,set,sorted set存取均无问题,存入redis时无乱码
      *
-     *      redisTemplate和stringRedisTemplate二者默认的序列化器均不能序列化Object
+     *      redisTemplate和stringRedisTemplate二者默认的序列化器均若要序列化该对象,则该类必须实现序列化接口
+     *         
      *
      *
      *
