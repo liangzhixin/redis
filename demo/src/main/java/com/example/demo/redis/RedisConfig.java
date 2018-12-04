@@ -43,7 +43,6 @@ public class RedisConfig {
      *
      *
      *
-     *
      * 自定义RedisTemplate注意:
      * 1.RedisTemplate<String, Object>的泛型(目前感觉使用RedisTemplate<String, Object>会好一点):
      *      String: 代表所能存储的key的类型
