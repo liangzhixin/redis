@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
@@ -17,7 +18,7 @@ import java.util.Set;
 public class TestJackson2JsonRedisSerializerUser {
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, User> redisTemplate;
 
     @Scheduled(cron = "0/3 * * * * ?")
     public void test() {
@@ -38,7 +39,6 @@ public class TestJackson2JsonRedisSerializerUser {
 //        log.info(">>>>>>>>>>>>>>>>>>string end...");
 
 
-
 //        //测试hash,存取无问题,存进reids之后以json格式字符串存储Object,转化为User也没问题
 //        log.info(">>>>>>>>>>>>>>>>>>hash start...");
 //        redisTemplate.opsForHash().put("obj_user_hash","user1", user);
@@ -49,7 +49,6 @@ public class TestJackson2JsonRedisSerializerUser {
 //        User u = (User) redisTemplate.opsForHash().get("obj_user_hash","user1");
 //        log.info("string get hash:" + JSON.toJSONString(u));
 //        log.info(">>>>>>>>>>>>>>>>>>hash end...");
-
 
 
 //        //测试list,存取无问题,存进reids之后以json格式字符串存储Object,转化为User也没问题
@@ -67,7 +66,6 @@ public class TestJackson2JsonRedisSerializerUser {
 //        log.info(">>>>>>>>>>>>>>>>>>list end...");
 
 
-
 //        //测试set,存取无问题,存进reids之后以json格式字符串存储Object,转化为User也没问题
 //        log.info(">>>>>>>>>>>>>>>>>>set start...");
 //        redisTemplate.opsForSet().add("obj_user_set",user);
@@ -82,15 +80,14 @@ public class TestJackson2JsonRedisSerializerUser {
 //        log.info(">>>>>>>>>>>>>>>>>>set end...");
 
 
-
         //测试sorted set,存取无问题,存进reids之后以json格式字符串存储Object,转化为User也没问题
         log.info(">>>>>>>>>>>>>>>>>>sorted set start...");
-        redisTemplate.opsForZSet().add("obj_user_sorted_set",user,3.0);
+        redisTemplate.opsForZSet().add("obj_user_sorted_set", user, 3.0);
 
-        Set set = redisTemplate.opsForZSet().range("obj_user_sorted_set",0,-1);
+        Set set = redisTemplate.opsForZSet().range("obj_user_sorted_set", 0, -1);
         log.info("string get sorted set:" + set);
 
-        Set<User> userSet = redisTemplate.opsForZSet().range("obj_user_sorted_set",0,-1);
+        Set<User> userSet = redisTemplate.opsForZSet().range("obj_user_sorted_set", 0, -1);
         for (User u : userSet) {
             log.info("u:" + JSON.toJSONString(u));
         }

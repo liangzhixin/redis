@@ -1,6 +1,8 @@
 package com.example.demo.redis;
 
 import com.alibaba.fastjson.JSON;
+import com.example.demo.entity.Student;
+import com.example.demo.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -20,7 +22,7 @@ import java.util.Set;
 public class TestDefaultSerializer {
 
     @Autowired
-    RedisTemplate redisTemplate;
+    RedisTemplate<Object, Object> redisTemplate;
 
     @Autowired
     StringRedisTemplate stringRedisTemplate;
@@ -28,7 +30,23 @@ public class TestDefaultSerializer {
     @Scheduled(cron = "0/3 * * * * ?")
     public void test() {
 
-//        //测试string,存取无问题,但是通过redisTemplate存进reids之后value和key显示的是乱码
+        //测试存取对象
+        User user = new User();
+        user.setName("gailun");
+        user.setAge(18);
+        Student stu = new Student();
+        stu.setName("kate");
+        stu.setAge(18);
+        stu.setGender("female");
+        redisTemplate.opsForValue().set("user_one", user);
+        redisTemplate.opsForValue().set("stu_one", stu);
+
+        User u = (User) redisTemplate.opsForValue().get("user_one");
+        Student s = (Student) redisTemplate.opsForValue().get("stu_one");
+        log.info("user_one:" + JSON.toJSONString(u));
+        log.info("stu_one:" + JSON.toJSONString(s));
+
+        //测试string,存取无问题,但是通过redisTemplate存进reids之后value和key显示的是乱码
 //        log.info(">>>>>>>>>>>>>>>>>>string start...");
 //        redisTemplate.opsForValue().set("age", "18");
 //        stringRedisTemplate.opsForValue().set("string_age","18");
@@ -38,7 +56,6 @@ public class TestDefaultSerializer {
 //        log.info("redisTemplate get age:" + age);
 //        log.info("stringRedisTemplate get age:" + stringAge);
 //        log.info(">>>>>>>>>>>>>>>>>>string end...");
-
 
 
 //        //测试hash,存取无问题,但是通过redisTemplate存进reids之后value和key显示的是乱码
@@ -53,7 +70,6 @@ public class TestDefaultSerializer {
 //        log.info(">>>>>>>>>>>>>>>>>>hash end...");
 
 
-
 //        //测试list,存取无问题,但是通过redisTemplate存进reids之后value和key显示的是乱码
 //        log.info(">>>>>>>>>>>>>>>>>>list start...");
 //        redisTemplate.opsForList().rightPush("score","18");
@@ -66,7 +82,6 @@ public class TestDefaultSerializer {
 //        log.info(">>>>>>>>>>>>>>>>>>list end...");
 
 
-
 //        //测试set,存取无问题,但是通过redisTemplate存进reids之后value和key显示的是乱码
 //        log.info(">>>>>>>>>>>>>>>>>>set start...");
 //        redisTemplate.opsForSet().add("hobby","lol");
@@ -77,7 +92,6 @@ public class TestDefaultSerializer {
 //        log.info("redisTemplate get hobby:" + hobby);
 //        log.info("stringRedisTemplate get hobby:" + stringHobby);
 //        log.info(">>>>>>>>>>>>>>>>>>set end...");
-
 
 
 //        //测试sorted set
