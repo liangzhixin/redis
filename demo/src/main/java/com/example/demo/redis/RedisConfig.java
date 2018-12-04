@@ -80,16 +80,11 @@ public class RedisConfig {
 
 
     /**
+     * (这个也可以试着用一下)
      * redisTemplate使用StringRedisSerializer进行序列化key,hash key
      *              使用Jackson2JsonRedisSerializer<Object>进行序列化value,hash value(使用jackson2将对象序列化为json)
      *      1.string,hash,list,set,sorted set存取均无问题,存入redis时无乱码
-     *      2.存取Object均无问题,但是强转为User报错
-     *      原因: 使用Jackson2JsonRedisSerializer在反序列化时会遇到问题，因为没有具体泛型或泛型为Object时，会将缓存中的数据反序列化为LinkedHashMap，而我们需要的是User对象，因此就会抛出一个异常。
-     *
-     *
-     *      注意了：！！！！！加上下面一段代码就可以了，很奇怪。
-     *
-     *
+     *      2.存取Object均无问题,强转为User也没问题,其他对象也可以
      */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(
@@ -100,7 +95,7 @@ public class RedisConfig {
 
         Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer =
                 new Jackson2JsonRedisSerializer<>(Object.class);
-        //加上这段代码好像就可以了
+
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
