@@ -6,18 +6,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 
 /**
  * 测试redisTemplate使用Jackson2JsonRedisSerializer<Object>进行序列化
  */
-//@Component
+@Component
 @Slf4j
 public class TestJackson2JsonRedisSerializer {
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Scheduled(cron = "0/3 * * * * ?")
     public void test(){
@@ -26,16 +27,16 @@ public class TestJackson2JsonRedisSerializer {
         user.setName("zhangsan");
         user.setAge(18);
 
-//        //测试string,存取无问题,存进reids之后以json格式字符串存储Object,但是强转为User时会报错
-//        log.info(">>>>>>>>>>>>>>>>>>string start...");
-//        redisTemplate.opsForValue().set("obj_user",user);
-//
-//        Object obj = redisTemplate.opsForValue().get("obj_user");
-//        log.info("string get obj_user:" + JSON.toJSONString(obj));
-//        //下面会报错
-//        user = (User) redisTemplate.opsForValue().get("obj_user");
-//        log.info("string get obj_user:" + JSON.toJSONString(user));
-//        log.info(">>>>>>>>>>>>>>>>>>string end...");
+        //测试string,存取无问题,存进reids之后以json格式字符串存储Object,但是强转为User时会报错
+        log.info(">>>>>>>>>>>>>>>>>>string start...");
+        redisTemplate.opsForValue().set("obj_user",user);
+
+        Object obj = redisTemplate.opsForValue().get("obj_user");
+        log.info("string get obj_user:" + JSON.toJSONString(obj));
+        //下面会报错（加上那段代码又不会报错了）
+        user = (User) redisTemplate.opsForValue().get("obj_user");
+        log.info("string get obj_user:" + JSON.toJSONString(user));
+        log.info(">>>>>>>>>>>>>>>>>>string end...");
 
 
 
@@ -70,19 +71,19 @@ public class TestJackson2JsonRedisSerializer {
 
 
 
-        //测试set,存取无问题,存进reids之后以json格式字符串存储Object,但是强转为User时会报错
-        log.info(">>>>>>>>>>>>>>>>>>set start...");
-        redisTemplate.opsForSet().add("obj_user_set",user);
-
-        Set set = redisTemplate.opsForSet().members("obj_user_set");
-        log.info("string get set:" + set);
-
-        //下面会报错
-        Set<User> userSet = redisTemplate.opsForSet().members("obj_user_set");
-        for (User u : userSet) {
-            log.info("u:" + JSON.toJSONString(u));
-        }
-        log.info(">>>>>>>>>>>>>>>>>>set end...");
+//        //测试set,存取无问题,存进reids之后以json格式字符串存储Object,但是强转为User时会报错
+//        log.info(">>>>>>>>>>>>>>>>>>set start...");
+//        redisTemplate.opsForSet().add("obj_user_set",user);
+//
+//        Set set = redisTemplate.opsForSet().members("obj_user_set");
+//        log.info("string get set:" + set);
+//
+//        //下面会报错
+//        Set<User> userSet = redisTemplate.opsForSet().members("obj_user_set");
+//        for (User u : userSet) {
+//            log.info("u:" + JSON.toJSONString(u));
+//        }
+//        log.info(">>>>>>>>>>>>>>>>>>set end...");
 
 
 

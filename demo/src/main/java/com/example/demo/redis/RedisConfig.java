@@ -1,6 +1,9 @@
 package com.example.demo.redis;
 
 import com.example.demo.entity.User;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -82,21 +85,34 @@ public class RedisConfig {
      *      1.string,hash,list,set,sorted set存取均无问题,存入redis时无乱码
      *      2.存取Object均无问题,但是强转为User报错
      *      原因: 使用Jackson2JsonRedisSerializer在反序列化时会遇到问题，因为没有具体泛型或泛型为Object时，会将缓存中的数据反序列化为LinkedHashMap，而我们需要的是User对象，因此就会抛出一个异常。
+     *
+     *
+     *      注意了：！！！！！加上下面一段代码就可以了，很奇怪。
+     *
+     *
      */
-//    @Bean
-//    public RedisTemplate<String, Object> redisTemplate(
-//            RedisConnectionFactory redisConnectionFactory){
-//        RedisTemplate<String, Object> template = new RedisTemplate<>();
-//        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-//        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer =
-//                new Jackson2JsonRedisSerializer<>(Object.class);
-//        template.setConnectionFactory(redisConnectionFactory);
-//        template.setKeySerializer(stringRedisSerializer);   //key序列化
-//        template.setValueSerializer(jackson2JsonRedisSerializer); //value序列化
-//        template.setHashKeySerializer(stringRedisSerializer);   //hash key序列化
-//        template.setHashValueSerializer(jackson2JsonRedisSerializer); //hash value序列化
-//        return template;
-//    }
+    @Bean
+    public RedisTemplate<String, Object> redisTemplate(
+            RedisConnectionFactory redisConnectionFactory){
+        RedisTemplate<String, Object> template = new RedisTemplate<>();
+
+        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+
+        Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer =
+                new Jackson2JsonRedisSerializer<>(Object.class);
+        //加上这段代码好像就可以了
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+        objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+        jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
+
+        template.setConnectionFactory(redisConnectionFactory);
+        template.setKeySerializer(stringRedisSerializer);   //key序列化
+        template.setValueSerializer(jackson2JsonRedisSerializer); //value序列化
+        template.setHashKeySerializer(stringRedisSerializer);   //hash key序列化
+        template.setHashValueSerializer(jackson2JsonRedisSerializer); //hash value序列化
+        return template;
+    }
 
 
 
@@ -132,20 +148,20 @@ public class RedisConfig {
      *      3.序列化后的内容存储了对象的Class信息,可以操作多个对象的反序列化,不止是User
      *      4.存取对象时该类不需要实现序列化接口
      */
-    @Bean
-    public RedisTemplate<String, Object> redisTemplate(
-            RedisConnectionFactory redisConnectionFactory){
-        RedisTemplate<String, Object> template = new RedisTemplate<>();
-        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-        GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer =
-                new GenericJackson2JsonRedisSerializer();
-        template.setConnectionFactory(redisConnectionFactory);
-        template.setKeySerializer(stringRedisSerializer);   //key序列化
-        template.setValueSerializer(genericJackson2JsonRedisSerializer); //value序列化
-        template.setHashKeySerializer(stringRedisSerializer);   //hash key序列化
-        template.setHashValueSerializer(genericJackson2JsonRedisSerializer); //hash value序列化
-        return template;
-    }
+//    @Bean
+//    public RedisTemplate<String, Object> redisTemplate(
+//            RedisConnectionFactory redisConnectionFactory){
+//        RedisTemplate<String, Object> template = new RedisTemplate<>();
+//        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
+//        GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer =
+//                new GenericJackson2JsonRedisSerializer();
+//        template.setConnectionFactory(redisConnectionFactory);
+//        template.setKeySerializer(stringRedisSerializer);   //key序列化
+//        template.setValueSerializer(genericJackson2JsonRedisSerializer); //value序列化
+//        template.setHashKeySerializer(stringRedisSerializer);   //hash key序列化
+//        template.setHashValueSerializer(genericJackson2JsonRedisSerializer); //hash value序列化
+//        return template;
+//    }
 
 
 
