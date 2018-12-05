@@ -80,7 +80,7 @@ public class RedisConfig {
 
 
     /**
-     * (这个也可以试着用一下)
+     * (这个相比GenericJackson2JsonRedisSerializer好像效率更高一点,推荐)
      * redisTemplate使用StringRedisSerializer进行序列化key,hash key
      *              使用Jackson2JsonRedisSerializer<Object>进行序列化value,hash value(使用jackson2将对象序列化为json)
      *      1.string,hash,list,set,sorted set存取均无问题,存入redis时无乱码
