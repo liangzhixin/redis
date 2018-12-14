@@ -89,7 +89,7 @@ public class RedisConfig {
      */
     @Bean
     public RedisTemplate<String, Object> redisTemplate(
-            RedisConnectionFactory redisConnectionFactory){
+            JedisConnectionFactory jedisConnectionFactory){
         RedisTemplate<String, Object> template = new RedisTemplate<>();
 
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
@@ -102,7 +102,7 @@ public class RedisConfig {
         objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
 
-        template.setConnectionFactory(redisConnectionFactory);
+        template.setConnectionFactory(jedisConnectionFactory);
         template.setKeySerializer(stringRedisSerializer);   //key序列化
         template.setValueSerializer(jackson2JsonRedisSerializer); //value序列化
         template.setHashKeySerializer(stringRedisSerializer);   //hash key序列化
